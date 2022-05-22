@@ -17,8 +17,8 @@ const crawledPageSchema = new Schema({
   h2: {
     type: String
   },
-  linksCount: {
-    type: Number
+  links: {
+    type: Array
   },
   creationDate: {
     type: Date,
