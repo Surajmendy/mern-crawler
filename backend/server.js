@@ -36,7 +36,9 @@ app.use(compression());
 app.use(cookieParser());
 
 // allow AJAX requests to skip the Same-origin policy and access resources from remote hosts
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 
 // serve a visual favicon for the browser
 app.use(favicon(__dirname + '/favicon.ico'));
