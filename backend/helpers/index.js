@@ -18,7 +18,6 @@ export const fetchData =  (url) => {
       const allPagelinksArray = [];
       allPageLinks.each((index, element) => {
         allPagelinksArray.push({
-          // text: $(element).text().replace(/\s/g, ''), // get the text
           href: $(element).attr('href').replace(/\s/g, '')
         });
       });

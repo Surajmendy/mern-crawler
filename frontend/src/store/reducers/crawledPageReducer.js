@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 
-const init = [];
+const init = {};
 export const crawledPageReducer = createSlice({
   name: 'crawledData',
   initialState: init,
   reducers: {
     saveDataToState: (state = init, action) => {
       if (action.payload) {
-        return [
-          ...action.payload,
-        ];
+        return {
+          ...action.payload
+        };
       }
       return state;
     }

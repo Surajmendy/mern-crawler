@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,52 +10,43 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
+  root: {},
+  tableRightBorder: {
+    borderWidth: 0,
+    borderRightWidth: 1,
+    borderColor: 'black',
+    borderStyle: 'solid',
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function TableData(data) {
+export default function TableData({data}) {
   const classes = useStyles();
-
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Url</TableCell>
-            <TableCell align="right">Title</TableCell>
-            <TableCell align="right">Meta description</TableCell>
-            <TableCell align="right">H1</TableCell>
-            <TableCell align="right">H2</TableCell>
-            <TableCell align="right">Links count</TableCell>
+            <TableCell>Title</TableCell>
+            <TableCell>Meta description</TableCell>
+            <TableCell>H1</TableCell>
+            <TableCell>H2</TableCell>
+            <TableCell>Links count</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {rows.map((row) => (
-            <TableRow key={row.url}>
+          {data.map((row) => (
+            <TableRow key={row._id}>
               <TableCell component="th" scope="row">
-                {row.title}
+                {row.url}
               </TableCell>
-              <TableCell align="right">{row.metaDescription}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.h1}</TableCell>
-              <TableCell align="right">{row.h1}</TableCell>
-              <TableCell align="right">{row.links.length}</TableCell>
+              <TableCell>{row.title}</TableCell>
+              <TableCell>{row.metaDescription}</TableCell>
+              <TableCell>{row.h1}</TableCell>
+              <TableCell>{row.h2}</TableCell>
+              <TableCell>{row.links.length}</TableCell>
             </TableRow>
-          ))} */}
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

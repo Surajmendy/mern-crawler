@@ -12,10 +12,10 @@ export const crawl =  (req, res) => {
     // dump to database
     const crawledData = new CrawledPageModel({
       url: url,
-      title: response.title || 'No title for page',
-      metaDescription: response.meta || 'No meta description for this page',
-      h1: response.h1 || 'No h1 text for this page',
-      h2: response.h2 || 'No h2 text for this page',
+      title: response.title || 'No title set for page',
+      metaDescription: response.meta || 'No meta description set for this page',
+      h1: response.h1 || 'No h1 text set for this page',
+      h2: response.h2 || 'No h2 text set for this page',
       links: response.links
     });
     // save to db
@@ -39,14 +39,23 @@ export const crawl =  (req, res) => {
 };
 
 //load history using mongoose -> https://mongoosejs.com/
-export const getHistory = (req, res) => {
-  CrawledPageModel.find({}, (error, pages) => {
+export const getHistory =  (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  CrawledPageModel.find({},  async (error, pages) => {
     if (error) {
       return res.status(400).json(error);
     }
-
-    return res.send(pages);
-  });
+    const count =  await CrawledPageModel.countDocuments();
+    res.json({
+      data: pages,
+      totalPages: Math.ceil(count / limit),
+      currentPage: parseInt(page)
+    });
+    // return res.send(pages);
+  }).sort({creationDate: -1})
+    .limit(limit * 1)
+    .skip((page - 1) * limit)
+    .exec();
 };
 
 export const deleteUrlCrawledHistory = (req, res) => {

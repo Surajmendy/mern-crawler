@@ -21,10 +21,10 @@ const requests = {
 };
 
 const Crawler = {
-  crawl: (url) =>
-    requests.post('/crawler/crawl', {url}),
-  getHistory: () =>
-    requests.get('/crawler/history'),
+  crawl: (data) =>
+    requests.post('/crawler/crawl', data),
+  getHistory: (page, limit) =>
+    requests.get(`/crawler/history?page=${page}&limit=${limit}`),
 };
 
 export default {

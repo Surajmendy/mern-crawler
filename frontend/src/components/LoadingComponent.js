@@ -1,6 +1,5 @@
 import * as React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import { CircularProgress, Box } from '@material-ui/core';
 
 export default function LoadingComponent() {
   return (

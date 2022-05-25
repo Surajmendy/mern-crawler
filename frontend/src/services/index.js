@@ -2,4 +2,6 @@ import agent from '../agent/agent';
 
 
 
-export const getCrawledData = () =>  agent.Crawler.getHistory();
+export const getCrawledData = (page, limit) =>  agent.Crawler.getHistory(page, limit);
+
+export const submitCrawledUrlToServer = (data) => agent.Crawler.crawl(data);

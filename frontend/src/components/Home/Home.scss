@@ -5,6 +5,27 @@ margin-top: 30px;
 .dataContainer
 {
   display: flex;
-justify-content: center;
+  align-items: center;
+  justify-content: center;
   margin-top: 100px;
+  padding-top: 100px;
+}
+.formInputContainer {
+  padding-bottom: 40px;
+}
+.loaderContainer{
+  position : fixed;
+  top:50%;
+  left: 45%;
+}
+.tableContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crawlButton {
+  text-transform: capitalize !important;
+}
+.tabledata {
+  padding-bottom: 100px;
 }
