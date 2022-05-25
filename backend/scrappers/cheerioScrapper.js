@@ -2,7 +2,7 @@
 import cheerio from 'cheerio';
 import got from 'got';
 
-export const fetchData =  (url) => {
+export const cheerioScrapper =  (url) => {
   return new Promise( async (resolve, reject) => {
     try {
       const pageResponse = await got(url);
@@ -21,6 +21,9 @@ export const fetchData =  (url) => {
           href: $(element).attr('href').replace(/\s/g, '')
         });
       });
+      if(!title) {
+        reject('error');
+      }
       resolve(
         {
           'title': title,

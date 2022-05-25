@@ -10,7 +10,7 @@ import { getCrawledData, submitCrawledUrlToServer } from '../../services/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveDataToState } from '../../store/reducers/crawledPageReducer';
 import LoadingComponent from '../LoadingComponent';
-import { isValidURL } from '../../utils/validations';
+import { isValidUrl } from '../../utils/validations';
 
 const Home = () => {
 
@@ -24,13 +24,14 @@ const Home = () => {
   const [isError, setIsError] = useState(false);
   const [showAlert, setshowAlert] = useState(false);
   const [alertText, setAlertText] = useState('');
-  const [alertType, setAlertType] = useState('');
+  const [alertType, setAlertType] = useState('success');
   const [isCrawlingData, setIsCrawlingData] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   useEffect(() => {
     getData(currentPage);
   }, []);
+  // get data from server and save to state
   const getData = (value) => {
     setIsLoading(true);
     getCrawledData(value, 10).then((res) => {
@@ -40,6 +41,9 @@ const Home = () => {
       setIsLoading(false);
     }).catch(() => {
       setIsLoading(false);
+      setshowAlert(true);
+      setAlertType('error');
+      setAlertText('Error fetching data, please try again.');
     });
   };
   const handleUrlToCrawlChange = (event) => {
@@ -57,7 +61,7 @@ const Home = () => {
   };
   const handleSubmitUrlToCrawl = (event) => {
     event.preventDefault();
-    if(urlToCrawl === '' || !isValidURL(urlToCrawl)){
+    if(urlToCrawl === '' || !isValidUrl(urlToCrawl)){
       setIsError(true);
       return;
     }
@@ -92,8 +96,8 @@ const Home = () => {
             <h1>Entail Dev Test</h1>
             <Divider/>
             {/* <div className='dataContainer'> */}
-            <Grid container spacing={2} justifyContent="flex-end"  className='dataContainer'>
-              <Grid container spacing={2} justifyContent="flex-end"  className='formInputContainer'>
+            <Grid container spacing={2} justify="flex-end"  className='dataContainer'>
+              <Grid container spacing={2} justify="flex-end"  className='formInputContainer'>
                 <Grid item xs={6}>
                   <TextField
                     size="small"
@@ -103,7 +107,7 @@ const Home = () => {
                     fullWidth
                     placeholder="Paste URL here..."
                     type="text"
-                    helperText= {isError ? 'Must be a valid url': ''}
+                    helperText= {isError ? 'Must be a valid url that begins with https:// or http://': ''}
                     name='urlToCrawl'
                     defaultValue={urlToCrawl || ''}
                     onChange={handleUrlToCrawlChange}
@@ -120,14 +124,18 @@ const Home = () => {
                   </Button>
                 </Grid>
               </Grid>
-              <Grid container justifyContent="center" className='tabledata'>
+              <Grid container justify="center" className='tabledata'>
                 { isLoading ?
-                  <div className='loaderContainer' justifyContent="flex-end">
+                  <div className='loaderContainer' justify="flex-end">
                     <LoadingComponent />
                   </div>
                   :  <div ><TableData data = {crawledPage.data}/> </div>
                 }
-                <Pagination count={totalPages} page={currentPage} onChange={handleChangePageNumber} />
+                {
+                  crawledPage?.data?.length > 0 ?
+                    <Pagination count={totalPages} page={currentPage} onChange={handleChangePageNumber} /> :
+                    ''
+                }
               </Grid>
             </Grid>
             {/* </div> */}

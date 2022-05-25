@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     borderColor: 'black',
     borderStyle: 'solid',
   },
+  table: {
+    minWidth: 1000,
+  },
 });
 
 export default function TableData({data}) {
@@ -35,7 +38,10 @@ export default function TableData({data}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          { data?.length < 1 ? (
+                  <h4>No data scrapped.</h4>
+                ) :
+            data?.map((row) => (
             <TableRow key={row._id}>
               <TableCell component="th" scope="row">
                 {row.url}

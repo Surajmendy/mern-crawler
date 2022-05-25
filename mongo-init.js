@@ -1,10 +1,10 @@
 db.createUser({
-  user: "wassim-azirar",
-  pwd: "linkedin",
+  user: "suraj",
+  pwd: "12345678",
   roles: [
     {
       role: "readWrite",
-      db: "mern"
+      db: "mern-test"
     }
   ]
 });
