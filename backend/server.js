@@ -76,6 +76,8 @@ mongoose
   )
   .then(() => {
     console.log(emoji.get('heavy_check_mark'), 'MongoDB connection success');
+  }).catch((err) => {
+    console.log('---mongo db authentication failed---');
   });
 
 // routes

@@ -39,7 +39,11 @@ export default function TableData({data}) {
         </TableHead>
         <TableBody>
           { data?.length < 1 ? (
-                  <h4>No data scrapped.</h4>
+            <TableRow>
+            <TableCell colSpan={6} align='center'>
+            <h4 >No data scrapped.</h4>
+            </TableCell>
+            </TableRow>
                 ) :
             data?.map((row) => (
             <TableRow key={row._id}>
