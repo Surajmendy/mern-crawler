@@ -9,6 +9,7 @@ export const puppeteerScrapper = (url) => {
       const page = await browser.newPage();
       await page.goto(URL);
       // get title
+      // handle all await calls with Promise.all()
       const title = await page.title();
       const h1 = await page.$eval(
         'h1',
@@ -18,7 +19,7 @@ export const puppeteerScrapper = (url) => {
         'h2',
         (el) => el.textContent
       );
-      const meta = await page.$eval('meta[name="description"]', element => element.textContent);
+      const meta = await page.$eval('head > meta[name="description"]', element => element.content);
       let linksData = await page.evaluate(() => {
         let results = [];
         let items = document.querySelectorAll('a');

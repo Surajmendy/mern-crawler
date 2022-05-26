@@ -21,7 +21,7 @@ export const crawl =  (req, res) => {
     const crawledData = new CrawledPageModel({
       url: url,
       title: response.title || 'No title set for page',
-      metaDescription: response.meta || 'No meta description set for this page',
+      metaDescription: response.metaDescription || 'No meta description set for this page',
       h1: response.h1 || 'No h1 text set for this page',
       h2: response.h2 || 'No h2 text set for this page',
       links: response.links
@@ -43,7 +43,7 @@ export const crawl =  (req, res) => {
       const crawledData = new CrawledPageModel({
         url: url,
         title: response.title || 'No title set for page',
-        metaDescription: response.meta || 'No meta description set for this page',
+        metaDescription: response.metaDescription || 'No meta description set for this page',
         h1: response.h1 || 'No h1 text set for this page',
         h2: response.h2 || 'No h2 text set for this page',
         links: response.links

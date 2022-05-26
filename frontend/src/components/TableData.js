@@ -48,7 +48,7 @@ export default function TableData({data}) {
             data?.map((row) => (
             <TableRow key={row._id}>
               <TableCell component="th" scope="row">
-                {row.url}
+                <a href={row.url} target='_blank' rel="noopener noreferrer">{row.url}</a>
               </TableCell>
               <TableCell>{row.title}</TableCell>
               <TableCell>{row.metaDescription}</TableCell>
